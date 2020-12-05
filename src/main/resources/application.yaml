@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_URL:localhost:1199/telegraph}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+
+  jpa:
+    database: postgresql
+  servlet:
+    multipart:
+      enabled: true
+      location: /telegraph/images/
+      max-file-size: 100MB
+      max-request-size: 100MB
+  liquibase:
+    changeLog: classpath:/db/changelog/db.changelog-master.xml
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    drop-first: true
+security:
+  oauth2:
+    authorization:
+      jwt:
+        key-store: classpath:jwt/jwt.jks
+        key-alias: jwt
+        key-store-password: storePassword
+
+server:
+  servlet:
+    session:
+      cookie:
+        secure: false
+        http-only: false
+  port: 8080
