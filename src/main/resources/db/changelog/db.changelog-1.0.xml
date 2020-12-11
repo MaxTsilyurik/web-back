@@ -105,6 +105,13 @@
                 <constraints primaryKey="true" primaryKeyName="messages_pkey"/>
             </column>
 
+            <column name="date_time_create" remarks="Дата время вставки записи" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time_modif" remarks="Дата время модификации записи" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="author_id" type="uuid">
                 <constraints nullable="false" references="users(id)" foreignKeyName="messages_users_fk"/>
             </column>
@@ -122,6 +129,13 @@
         <createTable tableName="comments">
             <column name="id" remarks="ID" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="comments_pkey"/>
+            </column>
+
+            <column name="date_time_create" remarks="Дата время вставки записи" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time_modif" remarks="Дата время модификации записи" type="datetime">
+                <constraints nullable="false"/>
             </column>
 
             <column name="comment" type="varchar(100)">
