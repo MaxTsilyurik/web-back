@@ -167,6 +167,7 @@
                              primaryKeyName="likes_pkey"
                              references="users(id)"
                              foreignKeyName="likes_user_fk"
+                             unique="true"
                 />
             </column>
 
