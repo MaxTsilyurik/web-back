@@ -84,6 +84,83 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="1550" author="tsilyurik">
+        <createTable tableName="friends">
+            <column name="id" remarks="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="friends_pkey"/>
+            </column>
+
+            <column name="user_id" type="uuid">
+                <constraints nullable="false" references="users(id)" foreignKeyName="friends_user_id_users_fk"/>
+            </column>
+
+            <column name="friend_id" type="uuid">
+                <constraints nullable="false" references="users(id)" foreignKeyName="friends_friend_id_users_fk"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="messages">
+            <column name="id" remarks="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="messages_pkey"/>
+            </column>
+
+            <column name="author_id" type="uuid">
+                <constraints nullable="false" references="users(id)" foreignKeyName="messages_users_fk"/>
+            </column>
+
+            <column name="uri_image" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="message" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="comments">
+            <column name="id" remarks="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="comments_pkey"/>
+            </column>
+
+            <column name="comment" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="author_id" type="uuid">
+                <constraints nullable="false" references="users(id)" foreignKeyName="comments_users_fk"/>
+            </column>
+
+            <column name="messages_id" type="bigint">
+                <constraints references="messages(id)" foreignKeyName="messages_comment_fk"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="likes">
+
+            <column name="user_id" type="uuid">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="likes_pkey"
+                             references="users(id)"
+                             foreignKeyName="likes_user_fk"
+                />
+            </column>
+
+            <column name="messages_id" type="bigint">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="likes_pkey"
+                             references="messages(id)"
+                             foreignKeyName="likes_messages_fk"
+                />
+            </column>
+
+        </createTable>
+
+    </changeSet>
 
 
 </databaseChangeLog>
