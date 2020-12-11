@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MessagesServiceImp implements MessagesService {
 
-    private List<MessagesEntity> init() {
+   /* private List<MessagesEntity> init() {
         UserEntity userEntity = new UserEntity(1L, "Max", "Tsilyurik");
         UserEntity userEntity2 = new UserEntity(2L, "Petr", "Ivanov");
         UserEntity userEntity3 = new UserEntity(3L, "Ricardo", "Milos");
@@ -19,10 +19,10 @@ public class MessagesServiceImp implements MessagesService {
         MessagesEntity messagesEntity2 = new MessagesEntity(2L, "Я с ним согласен", userEntity2);
         MessagesEntity messagesEntity3 = new MessagesEntity(3L, "Космический флекс", userEntity3);
         return List.of(messagesEntity, messagesEntity2, messagesEntity3);
-    }
+    }*/
 
     @Override
     public List<MessagesEntity> getAll() {
-        return init();
+        return null;
     }
 }

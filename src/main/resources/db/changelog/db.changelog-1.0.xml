@@ -56,6 +56,9 @@
             <column name="patronymic" type="varchar(40)">
                 <constraints nullable="false"/>
             </column>
+            <column name="gender" type="smallint">
+                <constraints nullable="false"/>
+            </column>
             <column name="phone" type="varchar(32)"/>
             <column name="account_confirmed" type="boolean"/>
             <column name="account_expired" type="boolean"/>
@@ -96,6 +99,10 @@
 
             <column name="friend_id" type="uuid">
                 <constraints nullable="false" references="users(id)" foreignKeyName="friends_friend_id_users_fk"/>
+            </column>
+
+            <column name="status" type="smallint">
+                <constraints nullable="false"/>
             </column>
 
         </createTable>
