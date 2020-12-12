@@ -1,6 +1,5 @@
 package com.example.webback.business.entity;
 
-import com.example.webback.business.enums.Gender;
 import com.example.webback.business.enums.StatusFriends;
 import lombok.*;
 
