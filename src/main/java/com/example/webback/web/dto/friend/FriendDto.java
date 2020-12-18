@@ -1,4 +1,6 @@
 package com.example.webback.web.dto.friend;
 
-public class FriendDto {
+import com.example.webback.web.dto.ParentDto;
+
+public class FriendDto implements ParentDto {
 }

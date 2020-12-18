@@ -1,4 +1,6 @@
 package com.example.webback.web.dto.messages;
 
-public class MessagesReadDto {
+import com.example.webback.web.dto.ParentDto;
+
+public class MessagesReadDto implements ParentDto {
 }

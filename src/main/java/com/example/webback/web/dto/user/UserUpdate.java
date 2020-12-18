@@ -1,4 +1,6 @@
 package com.example.webback.web.dto.user;
 
-public class UserUpdate {
+import com.example.webback.web.dto.ParentDto;
+
+public class UserUpdate implements ParentDto {
 }

@@ -1,4 +1,6 @@
 package com.example.webback.web.dto.comment;
 
-public class CommentDto {
+import com.example.webback.web.dto.ParentDto;
+
+public class CommentDto implements ParentDto {
 }
