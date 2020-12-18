@@ -1,11 +1,14 @@
 package com.example.webback.web.api.v1;
 
-import com.example.webback.business.entity.UserEntity;
 import com.example.webback.business.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.webback.web.dto.user.UserDto;
+import com.example.webback.web.dto.user.UserRegister;
+import com.example.webback.web.dto.user.UserUpdate;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 import static com.example.webback.utils.ApiConstant.USER;
 
@@ -20,8 +23,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
-    public UserEntity getById(@PathVariable Long id){
-        return userService.getById(id);
+    @DeleteMapping("/{userId}")
+    public void delete(@PathVariable UUID userId) {
+        userService.delete(userId);
+    }
+
+    @GetMapping("/{userId}")
+    public UserDto get(@PathVariable UUID userId) {
+        return userService.findDtoById(userId);
+    }
+
+    @GetMapping
+    public List<UserDto> getAll() {
+        return userService.findAllDto();
+    }
+
+    @PostMapping
+    public UUID register(@RequestBody UserRegister user) {
+      return userService.register(user);
+    }
+
+    @PutMapping
+    public void update(@Valid @RequestBody UserUpdate userDto) {
+        userService.update(userDto);
     }
 }
