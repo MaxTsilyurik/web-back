@@ -8,9 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter
