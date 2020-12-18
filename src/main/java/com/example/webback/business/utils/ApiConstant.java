@@ -12,4 +12,6 @@ public final class ApiConstant {
     public static final String MESSAGES = ROOT_PATH + "/messages";
 
     public static final String FRIENDS = ROOT_PATH + "/friends";
+
+    public static final String COMMENTS = ROOT_PATH + "/comments";
 }
