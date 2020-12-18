@@ -1,10 +1,9 @@
 package com.example.webback.web.api.v1;
 
-import com.example.webback.business.entity.MessagesEntity;
 import com.example.webback.business.service.MessagesService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.webback.web.dto.messages.MessagesCreateDto;
+import com.example.webback.web.dto.messages.MessagesReadDto;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +20,19 @@ public class MessagesController {
     }
 
     @GetMapping
-    List<MessagesEntity> getAllMessages(){
-        return messagesService.getAll();
+    public List<MessagesReadDto> getAllMessages(){
+        return messagesService.findAllDto();
     }
+
+    @PostMapping
+    public Long save(@RequestBody MessagesCreateDto dto){
+        return messagesService.saveDto(dto);
+    }
+
+    @PutMapping
+    public void update(@RequestBody MessagesCreateDto dto) { messagesService.update(dto);}
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){messagesService.delete(id);}
+
 }

@@ -1,9 +1,8 @@
 package com.example.webback.business.service;
 
-import com.example.webback.business.entity.MessagesEntity;
+import com.example.webback.web.dto.messages.MessagesCreateDto;
+import com.example.webback.web.dto.messages.MessagesReadDto;
 
-import java.util.List;
+public interface MessagesService extends DtoCrudService<Long, MessagesReadDto, MessagesCreateDto>{
 
-public interface MessagesService {
-    List<MessagesEntity> getAll();
 }
