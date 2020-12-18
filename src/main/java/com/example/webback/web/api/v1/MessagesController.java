@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.webback.business.utils.ApiConstant.MESSAGES;
+import static com.example.webback.utils.ApiConstant.MESSAGES;
 
 @RestController
 @RequestMapping(MESSAGES)
