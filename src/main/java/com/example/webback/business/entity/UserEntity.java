@@ -15,6 +15,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -29,7 +30,10 @@ import static javax.persistence.CascadeType.ALL;
 @AllArgsConstructor
 @Builder
 @ToString(exclude = {"comments", "messages", "friends"})
-public class UserEntity implements UserDetails {
+public class UserEntity implements UserDetails, Serializable {
+
+    private static final long serialVersionUID = 1905122041950251207L;
+
     @Id
     @GeneratedValue(generator = "UserUUIDGenerator")
     @GenericGenerator(name = "UserUUIDGenerator", strategy = "org.hibernate.id.UUIDGenerator")
@@ -86,13 +90,13 @@ public class UserEntity implements UserDetails {
     private LocalDateTime dateTimeModif;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CommentEntity> comments;
+    private transient List<CommentEntity> comments;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MessagesEntity> messages;
+    private transient List<MessagesEntity> messages;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FriendEntity> friends;
+    private transient List<FriendEntity> friends;
 
 
 
@@ -107,7 +111,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return userAuthorities;
     }
 
 
