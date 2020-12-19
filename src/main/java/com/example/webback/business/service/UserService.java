@@ -39,4 +39,7 @@ public interface UserService extends UserDetailsService {
     Map<String, Object> getAdditionInformation(OAuth2Authentication auth);
 
     List<UserEntity> byAuthority(String authorityName);
+
+    void checkResolution(UUID id);
+
 }

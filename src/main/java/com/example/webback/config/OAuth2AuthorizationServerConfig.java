@@ -1,6 +1,5 @@
 package com.example.webback.config;
 
-import com.example.webback.config.CustomJwtAccessTokenConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,7 +45,6 @@ import java.util.Optional;
 
 @Configuration
 @EnableAuthorizationServer
-//@Import({AuthorizationServerTokenServicesConfiguration.class})
 @EnableConfigurationProperties(AuthorizationServerProperties.class)
 @RequiredArgsConstructor
 public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {

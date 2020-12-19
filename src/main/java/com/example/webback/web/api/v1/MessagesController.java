@@ -20,7 +20,7 @@ public class MessagesController {
     }
 
     @GetMapping
-    public List<MessagesReadDto> getAllMessages(){
+    public List<MessagesReadDto> getAll(){
         return messagesService.findAllDto();
     }
 

@@ -9,10 +9,13 @@ import com.example.webback.business.service.UserService;
 import com.example.webback.web.dto.user.UserDto;
 import com.example.webback.web.dto.user.UserRegister;
 import com.example.webback.web.dto.user.UserUpdate;
+import com.example.webback.web.error.NotAccessException;
 import com.example.webback.web.error.ResourceNotFoundException;
 import com.example.webback.web.mapper.UserMapper;
+import liquibase.pro.packaged.O;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -130,4 +133,22 @@ public class UserServiceImpl implements UserService {
     public List<UserEntity> byAuthority(String authorityName) {
         return userRepository.findByAuthority(authorityName);
     }
+
+    @Override
+    public void checkResolution(UUID id) {
+        if (!isAccess(id))
+            throw new NotAccessException("Нет доступа");
+
+    }
+
+    private boolean isAccess(UUID id) {
+        String userId = getAdditionInformation(getOAuth2Authentication()).get("user_id").toString();
+        return id.toString().equals(userId);
+    }
+
+    private OAuth2Authentication getOAuth2Authentication() {
+        return (OAuth2Authentication) SecurityContextHolder.getContext().getAuthentication();
+    }
+
+
 }

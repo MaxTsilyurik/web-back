@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Slf4j
@@ -30,6 +32,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleResourceNotFound(ResourceNotFoundException ex) {
         ErrorResult errorResult = new ErrorResult(NOT_FOUND);
         errorResult.setMessage(ex.getMessage());
+        return buildResponseEntity(errorResult);
+    }
+
+    @ExceptionHandler(NotAccessException.class)
+    protected ResponseEntity<Object> handleNotAccessException(NotAccessException ex) {
+        ErrorResult errorResult = new ErrorResult(FORBIDDEN);
+        errorResult.setMessage( ex.getMessage() );
+        errorResult.setDebugMessage(ex.getMessage());
         return buildResponseEntity(errorResult);
     }
 
