@@ -124,7 +124,7 @@
             </column>
 
             <column name="uri_image" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="message" type="varchar(100)">

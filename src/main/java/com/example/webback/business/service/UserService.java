@@ -28,10 +28,6 @@ public interface UserService extends UserDetailsService {
 
     UserEntity save(UserEntity user);
 
-    void addAuthority(UUID userId, Integer authorityId);
-
-    void deleteAuthority(UUID userId, Integer authorityId);
-
     AuthorityEntity findAuthorityByName(AuthorityEnum authority);
 
     UUID register(UserRegister newUser);

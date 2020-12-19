@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -30,6 +31,7 @@ import static javax.persistence.CascadeType.ALL;
 @AllArgsConstructor
 @Builder
 @ToString(exclude = {"comments", "messages", "friends"})
+@EntityListeners(AuditingEntityListener.class)
 public class UserEntity implements UserDetails, Serializable {
 
     private static final long serialVersionUID = 1905122041950251207L;

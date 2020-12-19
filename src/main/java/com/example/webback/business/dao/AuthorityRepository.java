@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthorityRepository extends PagingAndSortingRepository<AuthorityEntity,Integer> {
+    AuthorityEntity findAllByName(String name);
 }

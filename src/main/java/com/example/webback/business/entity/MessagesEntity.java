@@ -1,8 +1,10 @@
 package com.example.webback.business.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,6 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "messages")
+@EntityListeners(AuditingEntityListener.class)
 public class MessagesEntity extends ParentEntity<Long>{
 
     @Column(name = "message")
@@ -35,6 +38,7 @@ public class MessagesEntity extends ParentEntity<Long>{
     @LastModifiedDate
     private LocalDateTime dateTimeModif;
 
+    @CreatedBy
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private UserEntity author;

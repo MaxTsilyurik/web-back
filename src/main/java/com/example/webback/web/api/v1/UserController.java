@@ -38,11 +38,6 @@ public class UserController {
         return userService.findAllDto();
     }
 
-    @PostMapping
-    public UUID register(@RequestBody UserRegister user) {
-      return userService.register(user);
-    }
-
     @PutMapping
     public void update(@Valid @RequestBody UserUpdate userDto) {
         userService.update(userDto);

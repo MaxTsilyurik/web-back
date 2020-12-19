@@ -5,6 +5,7 @@ import com.example.webback.business.entity.UserEntity;
 import com.example.webback.business.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -19,6 +20,8 @@ public class AuditorAwareImpl implements AuditorAware<UserEntity> {
     @Override
     public Optional<UserEntity> getCurrentAuditor() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
+        if (securityContext.getAuthentication() instanceof AnonymousAuthenticationToken)
+            return Optional.empty();
         OAuth2Authentication authentication = (OAuth2Authentication) securityContext.getAuthentication();
         if (authentication != null){
             Map<String, Object> mapDetails = userService.getAdditionInformation(authentication);

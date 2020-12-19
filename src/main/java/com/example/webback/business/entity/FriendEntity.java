@@ -2,6 +2,7 @@ package com.example.webback.business.entity;
 
 import com.example.webback.business.enums.StatusFriends;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class FriendEntity extends ParentEntity<Long>{
 
     @ManyToOne
