@@ -12,7 +12,6 @@ import com.example.webback.web.dto.user.UserUpdate;
 import com.example.webback.web.error.NotAccessException;
 import com.example.webback.web.error.ResourceNotFoundException;
 import com.example.webback.web.mapper.UserMapper;
-import liquibase.pro.packaged.O;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +21,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -66,12 +66,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(UserUpdate userDto) {
-
+        checkResolution(userDto.getId());
+        UserEntity entity = userRepository
+                .findById(userDto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(userDto));
+        userMapper.updateFromDTO(userDto,entity);
+        userRepository.save(entity);
     }
 
     @Override
+    @Transactional
     public void delete(UUID id) {
-
+        checkResolution(id);
+        UserEntity entity = userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+        userRepository.delete(entity);
     }
 
     

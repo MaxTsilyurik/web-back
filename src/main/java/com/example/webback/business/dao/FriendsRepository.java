@@ -4,6 +4,13 @@ import com.example.webback.business.entity.FriendEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-interface  FriendsRepository extends JpaRepository<FriendEntity, Long> {
+public interface FriendsRepository extends JpaRepository<FriendEntity, Long> {
+    boolean existsByFriendId(UUID friendId);
+
+    FriendEntity findByFriendId(UUID friendId);
+
+    void deleteByFriendIdAndUserId(UUID friendId, UUID userId);
 }

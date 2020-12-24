@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Builder
 public class FriendEntity extends ParentEntity<Long>{
 
     @ManyToOne

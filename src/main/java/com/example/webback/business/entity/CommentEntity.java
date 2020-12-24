@@ -1,6 +1,7 @@
 package com.example.webback.business.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -30,6 +31,7 @@ public class CommentEntity extends ParentEntity<Long>{
     @LastModifiedDate
     private LocalDateTime dateTimeModif;
 
+    @CreatedBy
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private UserEntity author;
