@@ -6,7 +6,10 @@ import com.example.webback.business.entity.UserEntity;
 import com.example.webback.business.enums.StatusFriends;
 import com.example.webback.business.service.FriendsService;
 import com.example.webback.business.service.UserService;
+import com.example.webback.web.dto.friend.FriendDto;
+import com.example.webback.web.dto.friend.FriendReadDto;
 import com.example.webback.web.error.ResourceNotFoundException;
+import com.example.webback.web.mapper.FriendsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -23,6 +26,7 @@ import static com.example.webback.business.enums.StatusFriends.*;
 public class FriendsServiceImpl implements FriendsService {
     private final FriendsRepository repository;
     private final UserService userService;
+    private final FriendsMapper mapper;
 
 
     private void addedFriend(UserEntity entity, UserEntity friend, StatusFriends statusFriends){
@@ -73,5 +77,10 @@ public class FriendsServiceImpl implements FriendsService {
             throw new ResourceNotFoundException(friendId);
         repository.deleteByFriendIdAndUserId(friendId, getUserId());
         repository.deleteByFriendIdAndUserId(getUserId(), friendId);
+    }
+
+    @Override
+    public List<FriendDto> getFriends() {
+        return mapper.toReadDTOs(repository.findAllByUserId(getUserId()));
     }
 }

@@ -16,7 +16,6 @@ public class UserRegister implements ParentDto {
     private String firstName;
     private String secondName;
     private String patronymic;
-    private Integer executorTypeId;
     @Enumerated(EnumType.STRING)
     private AuthorityEnum authority;
     @Enumerated(EnumType.STRING)
